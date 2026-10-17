@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 const root=path.resolve(import.meta.dirname,'..');
-const files=['index.html','styles.css','app.js','chat.js','chat.css','assets/logo.jpg','assets/port.jpg'];
+const files=['index.html','styles.css','app.js','chat.js','chat.css','assets/logo.jpg','assets/port.jpg','assets/dga.jpg','assets/telcor.jpg','assets/ipsa.jpg','assets/minsa.jpg'];
 const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'application/javascript; charset=utf-8','.jpg':'image/jpeg'};
 const assets=Object.fromEntries(files.map(file=>['/'+file,{type:types[path.extname(file)],data:fs.readFileSync(path.join(root,'dist',file)).toString('base64')}]));
 const source=fs.readFileSync(path.join(root,'worker/index.mjs'),'utf8');

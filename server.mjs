@@ -5,7 +5,7 @@ import {Readable} from 'node:stream';
 import {handleChat} from './worker/index.mjs';
 const port=Number(process.env.PORT||4173);
 const root=path.resolve(import.meta.dirname,'dist');
-const assets=new Set(['index.html','styles.css','app.js','chat.js','chat.css','assets/logo.jpg','assets/port.jpg']);
+const assets=new Set(['index.html','styles.css','app.js','chat.js','chat.css','assets/logo.jpg','assets/port.jpg','assets/dga.jpg','assets/telcor.jpg','assets/ipsa.jpg','assets/minsa.jpg']);
 const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'application/javascript; charset=utf-8','.jpg':'image/jpeg'};
 http.createServer(async(req,res)=>{
   try{
