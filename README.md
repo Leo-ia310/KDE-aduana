@@ -61,4 +61,4 @@ La publicación en Sites utiliza `npm run build` y los secretos de servidor `GRO
 - Instagram: https://www.instagram.com/kde_as/
 - TikTok: https://www.tiktok.com/@kde_aduanasolution
 
-Las tarifas y plazos son estimaciones que deben confirmarse con el equipo. El proyecto mantiene su aviso académico sin fines de lucro.
+Las tarifas se muestran en córdobas nicaragüenses: aéreo C$256.20/lb y marítimo C$109.80/lb. Se aplica la tasa fija indicada por KDE de US$1 = C$36.60. Los precios y plazos son estimaciones que deben confirmarse con el equipo. El proyecto mantiene su aviso académico sin fines de lucro.
