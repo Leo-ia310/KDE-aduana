@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import path from 'node:path';
+const root=path.resolve(import.meta.dirname,'..');
+const files=['index.html','styles.css','app.js','chat.js','chat.css','assets/logo.jpg','assets/port.jpg'];
+const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'application/javascript; charset=utf-8','.jpg':'image/jpeg'};
+const assets=Object.fromEntries(files.map(file=>['/'+file,{type:types[path.extname(file)],data:fs.readFileSync(path.join(root,'dist',file)).toString('base64')}]));
+const source=fs.readFileSync(path.join(root,'worker/index.mjs'),'utf8');
+fs.mkdirSync(path.join(root,'dist/server'),{recursive:true});fs.mkdirSync(path.join(root,'dist/.openai'),{recursive:true});
+fs.writeFileSync(path.join(root,'dist/server/index.js'),source.replace('const ASSETS = {};','const ASSETS = '+JSON.stringify(assets)+';'));
+fs.copyFileSync(path.join(root,'.openai/hosting.json'),path.join(root,'dist/.openai/hosting.json'));
+console.log('Built Worker with embedded frontend assets.');

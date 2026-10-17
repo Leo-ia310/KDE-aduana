@@ -1,0 +1,10 @@
+{
+  "name": "kde-aduana-solutions",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env.local server.mjs",
+    "build": "node scripts/build-worker.mjs",
+    "test": "node --test tests/chat.test.mjs"
+  }
+}
