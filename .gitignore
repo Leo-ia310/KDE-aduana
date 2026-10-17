@@ -6,3 +6,5 @@ node_modules/
 dist/server/
 dist/.openai/
 *.log
+.vercel/
+vercel-public/

@@ -33,7 +33,10 @@ export async function handleChat(request, env, fetcher = fetch) {
   let body; try{body=JSON.parse(text)}catch{return json({error:'La consulta no es válida.'},400)}
   if(!Array.isArray(body.messages)||!body.messages.length||body.messages.length>12||body.messages.some(m=>!m||!['user','assistant'].includes(m.role)||typeof m.content!=='string'||!m.content.trim()||m.content.length>1500)||body.messages.at(-1).role!=='user')return json({error:'Escribe una consulta de hasta 1500 caracteres.'},400);
   if(!env.GROQ_API_KEY)return json({error:'El asistente aún no está disponible. Nuestro equipo puede ayudarte por WhatsApp.',whatsapp:true},503);
-  const id=request.headers.get('oai-authenticated-user-id')||request.headers.get('cf-connecting-ip')||'local';
+  // Vercel sets X-Forwarded-For; don't trust caller-supplied Sites/CF identity there.
+  const id=env.VERCEL==='1'
+    ? 'vercel:'+(request.headers.get('x-forwarded-for')?.split(',')[0].trim()||'unknown')
+    : request.headers.get('oai-authenticated-user-id')||request.headers.get('cf-connecting-ip')||'local';
   const now=Date.now();for(const [key,item] of limits){if(now-item.start>60000)limits.delete(key)}
   const bucket=limits.get(id)||{start:now,count:0};if(bucket.count>=15)return json({error:'Has enviado varias consultas. Espera un minuto o continúa por WhatsApp.',whatsapp:true},429);bucket.count++;limits.set(id,bucket);
   const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),20000);
